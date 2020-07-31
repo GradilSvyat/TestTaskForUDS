@@ -11,38 +11,37 @@ namespace CSharpTest
         public DateTime Calculate(DateTime startDate, int dayCount, WeekEnd[] weekEnds)
         {
             if (dayCount < 1)
-                throw new Exception("No working days"); 
+                throw new ArgumentException("No working days"); 
             DateTime result = startDate;
             List<DateTime> allWeekEnds = new List<DateTime>();
-            DateTime _weekEnd;
             if (weekEnds != null)
             {
+                DateTime oneDayOff;
                 foreach (var item in weekEnds)
                 {
-                    _weekEnd = item.StartDate;
-                    allWeekEnds.Add(_weekEnd);
-                    while (_weekEnd < item.EndDate)
+                    oneDayOff = item.StartDate;
+                    allWeekEnds.Add(oneDayOff);
+                    while (oneDayOff < item.EndDate)
                     {
-                        _weekEnd.AddDays(1);
-                        allWeekEnds.Add(_weekEnd);
+                        oneDayOff = oneDayOff.AddDays(1);
+                        allWeekEnds.Add(oneDayOff);
                     }
                 }
             }
             while (allWeekEnds.Contains(result))
             {
-                result.AddDays(1);
+                result = result.AddDays(1);
             }
-            int i = 1;
-            while (i<dayCount)
+            for (int i = 1; i <dayCount;)
             {
                 if(allWeekEnds.Contains(result))
                 {
-                    result.AddDays(1);
+                    result = result.AddDays(1);
                     continue;
                 }
                 else
                 {
-                    result.AddDays(1);
+                    result = result.AddDays(1);
                     i++;
                 }
             }

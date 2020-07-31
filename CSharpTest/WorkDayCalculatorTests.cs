@@ -67,5 +67,20 @@ namespace CSharpTest
 
             Assert.IsTrue(result.Equals(new DateTime(2017, 4, 23)));
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException),"No working days")]
+        public void TestDurationIs0()
+        {
+            DateTime startDate = new DateTime(2014, 12, 1);
+            int count = 0;
+
+            WeekEnd[] weekends = new WeekEnd[1]
+            {
+                new WeekEnd(new DateTime(2014, 12, 4), new DateTime(2014, 12, 5))
+            };
+
+            DateTime result = new WorkDayCalculator().Calculate(startDate, count, weekends);
+        }
     }
 }
