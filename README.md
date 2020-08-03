@@ -9,4 +9,4 @@ To the method input you receive a:
 2.	duration in days (whole number) and
 3.	weekends (array of objects with the fields "start date" and "end date")
 
-At the end the function return the date, which is counted as a start date + duration, without weekends.
+The function return the date, which is counted as a start date + duration, without weekends.
