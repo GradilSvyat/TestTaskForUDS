@@ -8,13 +8,13 @@ namespace CSharpTest
     {
         public DateTime Calculate(DateTime startDate, int dayCount, WeekEnd[] weekEnds)
         {
-            if (dayCount < 1)
+            if (dayCount < 1)                   // check input value dayCount
                 throw new ArgumentException("No working days"); 
             DateTime result = startDate.AddDays(dayCount-1);
             List<DateTime> allWeekEnds = new List<DateTime>();
             if (weekEnds != null)
             {
-                foreach (var item in weekEnds)
+                foreach (var item in weekEnds)      // creating a list of all holidays
                 {
                     allWeekEnds.Add(item.StartDate);
                     while (item.StartDate < item.EndDate)
@@ -24,7 +24,7 @@ namespace CSharpTest
                     }
                 }
             }
-            foreach(var day in allWeekEnds)
+            foreach(var day in allWeekEnds)         // changing the end date by the number of days off
             {
                 if (day >= startDate && day <= result)
                     result = result.AddDays(1);
