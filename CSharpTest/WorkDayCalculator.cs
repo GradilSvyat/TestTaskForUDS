@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSharpTest
 {
@@ -12,38 +10,24 @@ namespace CSharpTest
         {
             if (dayCount < 1)
                 throw new ArgumentException("No working days"); 
-            DateTime result = startDate;
+            DateTime result = startDate.AddDays(dayCount-1);
             List<DateTime> allWeekEnds = new List<DateTime>();
             if (weekEnds != null)
             {
-                DateTime oneDayOff;
                 foreach (var item in weekEnds)
                 {
-                    oneDayOff = item.StartDate;
-                    allWeekEnds.Add(oneDayOff);
-                    while (oneDayOff < item.EndDate)
+                    allWeekEnds.Add(item.StartDate);
+                    while (item.StartDate < item.EndDate)
                     {
-                        oneDayOff = oneDayOff.AddDays(1);
-                        allWeekEnds.Add(oneDayOff);
+                        item.StartDate = item.StartDate.AddDays(1);
+                        allWeekEnds.Add(item.StartDate);
                     }
                 }
             }
-            while (allWeekEnds.Contains(result))
+            foreach(var day in allWeekEnds)
             {
-                result = result.AddDays(1);
-            }
-            for (int i = 1; i <dayCount;)
-            {
-                if(allWeekEnds.Contains(result))
-                {
+                if (day >= startDate && day <= result)
                     result = result.AddDays(1);
-                    continue;
-                }
-                else
-                {
-                    result = result.AddDays(1);
-                    i++;
-                }
             }
             return result;
         }
