@@ -69,6 +69,22 @@ namespace CSharpTest
         }
 
         [TestMethod]
+        public void TestStartDateEqualSecondWeekEnd()
+        {
+            DateTime startDate = new DateTime(2017, 4, 23);
+            int count = 5;
+            WeekEnd[] weekends = new WeekEnd[2]
+             {
+                new WeekEnd(new DateTime(2017, 4, 21), new DateTime(2017, 4, 23)),
+                new WeekEnd(new DateTime(2017, 4, 28), new DateTime(2017, 4, 28))
+             };
+
+            DateTime result = new WorkDayCalculator().Calculate(startDate, count, weekends);
+
+            Assert.IsTrue(result.Equals(new DateTime(2017, 4, 29)));
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException),"No working days")]
         public void TestDurationIs0()
         {
