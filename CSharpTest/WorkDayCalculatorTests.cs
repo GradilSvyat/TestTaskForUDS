@@ -85,6 +85,22 @@ namespace CSharpTest
         }
 
         [TestMethod]
+        public void TestNotSortedArrayWeekEnd()
+        {
+            DateTime startDate = new DateTime(2017, 4, 23);
+            int count = 5;
+            WeekEnd[] weekends = new WeekEnd[2]
+             {
+                new WeekEnd(new DateTime(2017, 4, 28), new DateTime(2017, 4, 28)),
+                new WeekEnd(new DateTime(2017, 4, 21), new DateTime(2017, 4, 23))
+             };
+
+            DateTime result = new WorkDayCalculator().Calculate(startDate, count, weekends);
+
+            Assert.AreEqual((new DateTime(2017, 4, 29)),result);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException),"No working days")]
         public void TestDurationIs0()
         {

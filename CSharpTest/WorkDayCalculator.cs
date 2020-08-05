@@ -23,6 +23,7 @@ namespace CSharpTest
                         allWeekEnds.Add(item.StartDate);
                     }
                 }
+                allWeekEnds.Sort();
                 foreach (var day in allWeekEnds)         // changing the end date by the number of days off
                 {
                     if (day >= startDate && day <= result)
